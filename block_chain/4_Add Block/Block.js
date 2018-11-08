@@ -1,13 +1,14 @@
-import Block from "./Block";
+import SHA256 from "crypto-js/sha256";
 
-class Blockchain {
-    constructor() {
-        this.chain = [ new Block() ];
+class Block {
+    constructor(data) {
+        this.data = data;
+        this.hash = this.toHash(this.data);        
     }
-    addBlock(block){
-        block.previousHash = this.chain[this.chain.length - 1].hash;
-        this.chain.push(block);
+
+    toHash(data) {
+        return SHA256(data);
     }
 }
 
-export default Blockchain;
+export default Block;
